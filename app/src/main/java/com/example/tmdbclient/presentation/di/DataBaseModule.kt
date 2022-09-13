@@ -1,5 +1,6 @@
 package com.example.tmdbclient.presentation.di
 
+import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.example.tmdbclient.data.db.ArtistDao
@@ -26,14 +27,10 @@ class DataBaseModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(context: Context): TMDBDatabase {
-        return Room.databaseBuilder(
-            context,
-            TMDBDatabase::class.java, "Webclient"
-        )
+    fun provideMovieDataBase(app: Application):TMDBDatabase{
+        return Room.databaseBuilder(app,TMDBDatabase::class.java,"tmdbclient")
             .build()
     }
-
     /**
      * We have 3 DAO INTERFACES in this project and our local data source needs them as
      * dependencies.

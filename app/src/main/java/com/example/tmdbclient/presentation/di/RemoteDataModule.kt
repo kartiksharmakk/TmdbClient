@@ -1,5 +1,6 @@
 package com.example.tmdbclient.presentation.di
 
+import com.example.tmdbclient.BuildConfig
 import com.example.tmdbclient.data.api.TMDBService
 import com.example.tmdbclient.data.repository.ArtistsRemoteDataSourceImpl
 import com.example.tmdbclient.data.repository.artists.datasource.ArtistsRemoteDataSource
@@ -26,25 +27,22 @@ class RemoteDataModule {
     @Singleton
     @Provides
     fun provideArtistRemoteDataSource(
-        tmdbService: TMDBService,
-        apiKey:String
+        tmdbService: TMDBService
     ): ArtistsRemoteDataSource {
-        return ArtistsRemoteDataSourceImpl(tmdbService,apiKey)
+        return ArtistsRemoteDataSourceImpl(tmdbService,BuildConfig.API_KEY)
     }
     @Singleton
     @Provides
     fun provideMovieRemoteDataSource(
-        tmdbService: TMDBService,
-        apiKey :String
+        tmdbService: TMDBService
     ): MovieRemoteDatasource {
-        return MovieRemoteDataSourceImpl(tmdbService,apiKey)
+        return MovieRemoteDataSourceImpl(tmdbService,BuildConfig.API_KEY)
     }
     @Singleton
     @Provides
     fun provideTvShowRemoteDataSource(
         tmdbService: TMDBService,
-        apiKey:String
     ): TvShowRemoteDatasource {
-        return TvShowRemoteDataSourceImpl(tmdbService,apiKey)
+        return TvShowRemoteDataSourceImpl(tmdbService,BuildConfig.API_KEY)
     }
 }

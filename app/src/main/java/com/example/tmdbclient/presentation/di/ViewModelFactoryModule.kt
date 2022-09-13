@@ -7,6 +7,8 @@ import com.example.tmdbclient.presentation.tv.TvShowViewModelFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.scopes.ActivityScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -14,12 +16,12 @@ import javax.inject.Singleton
 Class for factory dependencies.
  */
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ActivityComponent::class)
 class ViewModelFactoryModule {
     /*
   Method to provide Factory with its dependencies.
    */
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideArtistViewModelFactoryModule(
         getArtistsUseCase: GetArtistsUseCase,
@@ -27,7 +29,7 @@ class ViewModelFactoryModule {
     ): ArtistViewModelFactory {
         return ArtistViewModelFactory(getArtistsUseCase,updateArtistsUseCase)
     }
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideMovieViewModelFactory(
         getMoviesUseCase: GetMoviesUseCase,
@@ -35,7 +37,7 @@ class ViewModelFactoryModule {
     ): MovieViewModelFactory {
         return MovieViewModelFactory(getMoviesUseCase,updateMoviesUseCase)
     }
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideTvShowViewModelFactoryModule(
         getTvShowsUseCase: GetTvShowsUseCase,
